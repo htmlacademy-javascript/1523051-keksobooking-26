@@ -6,15 +6,12 @@ const getRandomInt = (min, max) => {
 
 const getRandomFloatInclusive = (min, max, afterPoint) => {
   if (max>min) {
-    return (min + Math.random() * (max - min)).toFixed(afterPoint);}
-  else {
-    if (min===max) {
-      return min.toFixed(afterPoint);
-    } else {
-      return 'Значение От больше значения До';
-    }
+    return Number((min + Math.random() * (max - min)).toFixed(afterPoint));}
+  if (min===max) {
+    return Number(min.toFixed(afterPoint));
   }
+  return 'Значение От больше значения До';
 };
 
 getRandomInt(1, 6);
-getRandomFloatInclusive(0.5, 1.5);
+getRandomFloatInclusive(0.5, 1.5, 4);
