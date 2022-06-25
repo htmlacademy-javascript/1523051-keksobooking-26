@@ -81,13 +81,11 @@ const renderOffers = (count) => {
     offerElement.querySelector('.popup__description').textContent = offer.offer.description;
 
     const photoContainer = offerElement.querySelector('.popup__photos');
-    const photoListFragment = document.createDocumentFragment();
     photoContainer.innerHTML = '';
     if (offer.offer.photos.length) {
       offer.offer.photos.forEach((photo) => {
-        photoListFragment.append(createImage(photo));
+        photoContainer.append(createImage(photo));
       });
-      featureContainer.append(photoListFragment);
     }
     mapCanvas.appendChild(offerElement);
   });
