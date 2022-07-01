@@ -15,7 +15,8 @@ const houseTypeField = form.querySelector('#type');
 const housePriceField = form.querySelector('#price');
 
 const setPriceField = (value) => {
-  housePriceField.setAttribute('min',value);
+  housePriceField.placeholder=value;
+  housePriceField.min=value;
 };
 
 const setPriceForHouseType = () => {
@@ -39,7 +40,7 @@ const setPriceForHouseType = () => {
 };
 
 window.addEventListener ('load', ()=> {
-  address.value = `${latCenter.toFixed(5)  } с.ш. ${  lngCenter.toFixed(5)  } в.д.`;
+  address.value = `${latCenter.toFixed(5)}, ${lngCenter.toFixed(5)  }`;
   setPriceForHouseType();
 });
 
