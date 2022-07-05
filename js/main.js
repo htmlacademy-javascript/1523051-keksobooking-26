@@ -1,7 +1,6 @@
-import {formInactive, formActive} from './form-state.js';
-import {renderOffers} from './render.js';
+import {setOffersPin} from './map.js';
 import './form-validation.js';
+import './map.js';
 
-formInactive();
-formActive();
-renderOffers(1);
+
+setOffersPin(10);
