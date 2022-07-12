@@ -64,21 +64,26 @@ const renderOffer = (offer) => {
 
   const featureContainer = offerElement.querySelector('.popup__features');
   const featureListFragment = document.createDocumentFragment();
-  offer.offer.features.forEach((featureItem) => {
-    const featureListItem = featureContainer.querySelector(`.popup__feature--${  featureItem}`);
+  if (!offer.offer.features) {
+    featureContainer.innerHTML = '';
+  } else {
+    offer.offer.features.forEach((featureItem) => {
+      const featureListItem = featureContainer.querySelector(`.popup__feature--${  featureItem}`);
 
-    if (featureListItem) {
-      featureListFragment.append(featureListItem);
-    }
-  });
-  featureContainer.innerHTML = '';
-  featureContainer.append(featureListFragment);
+      if (featureListItem) {
+        featureListFragment.append(featureListItem);
+      }
+    });
+    featureContainer.innerHTML = '';
+    featureContainer.append(featureListFragment);
+  }
+
 
   offerElement.querySelector('.popup__description').textContent = offer.offer.description;
 
   const photoContainer = offerElement.querySelector('.popup__photos');
   photoContainer.innerHTML = '';
-  if (offer.offer.photos.length) {
+  if (offer.offer.photos) {
     offer.offer.photos.forEach((photo) => {
       photoContainer.append(createImage(photo));
     });
