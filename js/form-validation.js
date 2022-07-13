@@ -1,5 +1,5 @@
 import {sendData} from './api.js';
-import {showAlertError, showAlertSuccess} from './util.js';
+import {showAlertErrorSend, showAlertSuccessSend} from './util.js';
 const form = document.querySelector('.ad-form');
 const resetButton = form.querySelector('.ad-form__reset');
 
@@ -134,9 +134,9 @@ const setUserFormSubmit = () => {
     evt.preventDefault();
     if (pristine.validate()) {
       sendData(
-        ()=>{showAlertSuccess('Форма успешно отправлена');
+        ()=>{showAlertSuccessSend();
           reset();},
-        showAlertError,
+        showAlertErrorSend,
         new FormData(evt.target),
       );
 
