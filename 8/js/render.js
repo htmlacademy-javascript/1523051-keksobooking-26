@@ -1,4 +1,3 @@
-// const mapCanvas = document.querySelector('#map-canvas');
 const offerTemplate = document.querySelector('#card')
   .content
   .querySelector('.popup');
