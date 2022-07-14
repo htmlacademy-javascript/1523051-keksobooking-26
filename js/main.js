@@ -1,6 +1,10 @@
 import {setOffersPin} from './map.js';
 import './form-validation.js';
 import './map.js';
+import {getData} from './api.js';
+import {showAlertErrorGet} from './util.js';
+import {setUserFormSubmit} from './form-validation.js';
 
 
-setOffersPin(10);
+getData(setOffersPin, showAlertErrorGet);
+setUserFormSubmit();

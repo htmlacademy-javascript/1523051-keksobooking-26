@@ -1,4 +1,7 @@
+import {sendData} from './api.js';
+import {showAlertErrorSend, showAlertSuccessSend} from './util.js';
 const form = document.querySelector('.ad-form');
+const resetButton = form.querySelector('.ad-form__reset');
 
 const pristine = new Pristine(form, {
   classTo: 'ad-form__element',
@@ -73,6 +76,12 @@ window.addEventListener ('load', ()=> {
   setPriceForHouseType();
 });
 
+const reset = () => {
+  form.reset();
+  address.value = `${latCenter.toFixed(5)}, ${lngCenter.toFixed(5)  }`;
+  setPriceForHouseType();
+};
+
 houseTypeField.addEventListener ('change', ()=> {
   setPriceForHouseType();
 });
@@ -115,8 +124,23 @@ timeOut.addEventListener('change',()=>{
   timeIn.value=timeOut.value;
 });
 
-form.addEventListener('submit', (evt) => {
-  if (!pristine.validate()) {evt.preventDefault();}
+resetButton.addEventListener('click',(evt)=>{
+  evt.preventDefault();
+  reset();
 });
 
-export {latCenter, lngCenter, address};
+const setUserFormSubmit = () => {
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    if (pristine.validate()) {
+      sendData(
+        ()=>{showAlertSuccessSend();
+          reset();},
+        showAlertErrorSend,
+        new FormData(evt.target),
+      );
+
+    }
+  });};
+
+export {latCenter, lngCenter, address, setUserFormSubmit};
