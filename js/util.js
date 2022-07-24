@@ -82,4 +82,12 @@ const showAlertErrorSend = () => {
   });
 };
 
-export {getRandomInt, getRandomFloatInclusive, showAlertErrorGet, showAlertSuccessSend, showAlertErrorSend};
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+export {getRandomInt, getRandomFloatInclusive, showAlertErrorGet, showAlertSuccessSend, showAlertErrorSend, debounce};

@@ -51,6 +51,7 @@ const icon = L.icon({
 const markerGroup = L.layerGroup().addTo(map);
 
 const setOffersPin = (offers) => {
+  markerGroup.clearLayers();
   getFilterData(offers).forEach((offer) => {
     const lat = offer.location.lat;
     const lng = offer.location.lng;
