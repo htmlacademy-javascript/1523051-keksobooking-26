@@ -1,7 +1,9 @@
 import {latCenter, lngCenter, address} from './form-validation.js';
-import {formActive} from './form-state.js';
+import {formInactive, formActive} from './form-state.js';
 import {renderOffer} from './render.js';
 import {getFilterData} from './filter.js';
+
+if (document.readyState === 'interactive') {formInactive();}
 
 const map = L.map('map-canvas')
   .on('load', () => {
