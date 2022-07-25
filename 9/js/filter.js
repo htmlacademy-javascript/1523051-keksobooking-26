@@ -5,6 +5,7 @@ const housingPrice = filters.querySelector('#housing-price');
 const housingRooms = filters.querySelector('#housing-rooms');
 const housingGuests = filters.querySelector('#housing-guests');
 
+
 const getFilterData = (offers) => {
   const featuresFilterChecked = [];
   mapFeatures.querySelectorAll('input[type=checkbox]').forEach((elem)=>{if (elem.checked) {featuresFilterChecked.push(elem.value);}});
@@ -34,20 +35,24 @@ const getFilterData = (offers) => {
         if (housingGuests.value === '2') {return offer.offer.guests === 2;}
         if (housingGuests.value === '0') {return offer.offer.guests === 0;}
       }).filter((offer)=>{
+
       let checkSum = 0;
-      for (let i=0; i<featuresFilterChecked.length; i++){
+      if (offer.offer.features && featuresFilterChecked.length>0) {for (let i=0; i<featuresFilterChecked.length; i++){
         if (offer.offer.features.includes(featuresFilterChecked[i])) {checkSum++;}
       }
-      return checkSum===featuresFilterChecked.length;
-    });
+      return checkSum===featuresFilterChecked.length;}
+      if (offer.offer.features && featuresFilterChecked.length===0) {console.log(2);return true;}
+      if (!offer.offer.features && featuresFilterChecked.length===0) {return true;}
+      if (!offer.offer.features && featuresFilterChecked.length>0) {return false;}
+    }).slice(0, 9);
 
   return newOffers;
 };
 
-const ss = (cb) => {
-  document.querySelector('.filter').addEventListener('click', () => {
+const setFilterChange = (cb) => {
+  filters.addEventListener('change', () => {
     cb();
   });
 };
 
-export {getFilterData, ss};
+export {getFilterData, setFilterChange};
