@@ -58,7 +58,8 @@ const renderOffer = (offer) => {
   offerElement.querySelector('.popup__text--address').textContent = `${offer.location.lat  } ${  offer.location.lng}`;
   offerElement.querySelector('.popup__text--price').textContent = `${offer.offer.price  } ₽/ночь`;
   offerElement.querySelector('.popup__type').textContent = getHouseType(offer.offer.type);
-  offerElement.querySelector('.popup__text--capacity').textContent = `${offer.offer.rooms + getRoomEnding(offer.offer.rooms)  } для ${  offer.offer.guests  }${getGuestsEnding(offer.offer.guests)}`;
+  if (offer.offer.rooms && offer.offer.guests) {offerElement.querySelector('.popup__text--capacity').textContent = `${offer.offer.rooms + getRoomEnding(offer.offer.rooms)  } для ${  offer.offer.guests  }${getGuestsEnding(offer.offer.guests)}`;}
+  else {offerElement.querySelector('.popup__text--capacity').innerHTML = '';}
   offerElement.querySelector('.popup__text--time').textContent = `Заезд после ${  offer.offer.checkin  }, выезд до ${  offer.offer.checkout}`;
 
   const featureContainer = offerElement.querySelector('.popup__features');
