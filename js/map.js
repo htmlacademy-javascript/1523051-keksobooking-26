@@ -1,6 +1,9 @@
 import {latCenter, lngCenter, address} from './form-validation.js';
-import {formActive} from './form-state.js';
+import {formInactive, formActive} from './form-state.js';
 import {renderOffer} from './render.js';
+import {getFilterData} from './filter.js';
+
+if (document.readyState === 'interactive') {formInactive();}
 
 const map = L.map('map-canvas')
   .on('load', () => {
@@ -50,8 +53,8 @@ const icon = L.icon({
 const markerGroup = L.layerGroup().addTo(map);
 
 const setOffersPin = (offers) => {
-  offers.forEach((offer) => {
-
+  markerGroup.clearLayers();
+  getFilterData(offers).forEach((offer) => {
     const lat = offer.location.lat;
     const lng = offer.location.lng;
     const marker = L.marker(
