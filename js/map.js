@@ -1,13 +1,23 @@
-import {latCenter, lngCenter, address} from './form-validation.js';
-import {formInactive, formActive} from './form-state.js';
+import {latCenter, lngCenter, address, resetSubmitForm} from './form-validation.js';
+import {formInactive, formSubmitActive, formFilterActive} from './form-state.js';
 import {renderOffer} from './render.js';
-import {getFilterData} from './filter.js';
+import {getFilterData, setFilterChange} from './filter.js';
+import {getData} from './api.js';
+import {showAlertErrorGet, debounce} from './util.js';
+
+const RERENDER_DELAY = 500;
 
 if (document.readyState === 'interactive') {formInactive();}
 
 const map = L.map('map-canvas')
   .on('load', () => {
-    formActive();
+    formSubmitActive();
+    getData((offers)=>{
+      formFilterActive();
+      resetSubmitForm(()=>{setOffersPin(offers);});
+      setOffersPin(offers);
+      setFilterChange(debounce(()=>{setOffersPin(offers);}, RERENDER_DELAY));
+    }, showAlertErrorGet);
   })
   .setView({
     lat: latCenter,
@@ -52,7 +62,7 @@ const icon = L.icon({
 
 const markerGroup = L.layerGroup().addTo(map);
 
-const setOffersPin = (offers) => {
+function setOffersPin (offers) {
   markerGroup.clearLayers();
   getFilterData(offers).forEach((offer) => {
     const lat = offer.location.lat;
@@ -70,8 +80,6 @@ const setOffersPin = (offers) => {
       .addTo(markerGroup)
       .bindPopup(renderOffer(offer));
   });
-};
+}
 
-export {setOffersPin};
-
-
+export {setOffersPin, map, mainPinMarker};
