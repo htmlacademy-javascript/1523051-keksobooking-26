@@ -1,10 +1,12 @@
+const OFFERS_COUNT = 10;
+const LOW_PRICE = 10000;
+const HIGH_PRICE = 50000;
 const filters = document.querySelector('.map__filters');
 const mapFeatures = filters.querySelector('.map__features');
 const housingType = filters.querySelector('#housing-type');
 const housingPrice = filters.querySelector('#housing-price');
 const housingRooms = filters.querySelector('#housing-rooms');
 const housingGuests = filters.querySelector('#housing-guests');
-const OFFERS_COUNT = 10;
 
 const checkType = (offer)=> {
   if (housingType.value === 'any') {return true;}
@@ -13,9 +15,9 @@ const checkType = (offer)=> {
 
 const checkPryce = (offer)=> {
   if (housingPrice.value === 'any') {return true;}
-  if (housingPrice.value === 'low') {return offer.offer.price < 10000;}
-  if (housingPrice.value === 'middle') {return offer.offer.price >= 10000 && offer.offer.price <= 50000;}
-  if (housingPrice.value === 'high') {return offer.offer.price >50000;}
+  if (housingPrice.value === 'low') {return offer.offer.price < LOW_PRICE;}
+  if (housingPrice.value === 'middle') {return offer.offer.price >= LOW_PRICE && offer.offer.price <= HIGH_PRICE;}
+  if (housingPrice.value === 'high') {return offer.offer.price >HIGH_PRICE;}
 };
 
 const checkRooms = (offer)=> {

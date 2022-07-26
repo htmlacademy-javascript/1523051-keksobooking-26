@@ -1,4 +1,6 @@
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+const PHOTO_WIDTH = 70;
+const PHOTO_HEIGHT = 70;
 
 const fileAvatarChooser = document.querySelector('.ad-form__field input[type=file]');
 const previewAvatar = document.querySelector('.ad-form-header__preview img');
@@ -21,8 +23,8 @@ const createPhoto = (link) =>{
   const photo = document.createElement('img');
   photo.src = link;
   photo.textContent = 'Фотография жилья';
-  photo.width = 70;
-  photo.height = 70;
+  photo.width = PHOTO_WIDTH;
+  photo.height = PHOTO_HEIGHT;
   return photo;
 };
 
@@ -36,3 +38,5 @@ filePhotoChooser.addEventListener('change', () => {
     previewPhotoContainer.appendChild(createPhoto(URL.createObjectURL(file)));
   }
 });
+
+export {previewPhotoContainer, previewAvatar};

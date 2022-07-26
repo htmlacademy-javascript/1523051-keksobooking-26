@@ -60,7 +60,7 @@ const showAlertSuccessSend = () => {
       evt.preventDefault();
       messageSuccessTemplate.remove();
     }
-  });
+  }, {once:true});
 };
 
 const showAlertErrorSend = () => {
@@ -79,7 +79,7 @@ const showAlertErrorSend = () => {
       evt.preventDefault();
       messageErrorTemplate.remove();
     }
-  });
+  }, {once:true});
 };
 
 const debounce = (callback, timeoutDelay) => {

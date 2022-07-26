@@ -1,5 +1,6 @@
+const SERVER_ADDRESS = 'https://26.javascript.pages.academy/keksobooking';
 const getData = (onSuccess, onFail) => {
-  fetch('https://26.javascript.pages.academy/keksobooking/data')
+  fetch(`${SERVER_ADDRESS}/data`)
     .then((response) => response.json())
     .then((array) => {
       onSuccess(array);
@@ -11,7 +12,7 @@ const getData = (onSuccess, onFail) => {
 
 const sendData = (onSuccess, onFail, body) => {
   fetch(
-    'https://26.javascript.pages.academy/keksobooking',
+    SERVER_ADDRESS,
     {
       method: 'POST',
       body,
