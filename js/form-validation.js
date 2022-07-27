@@ -168,11 +168,12 @@ const setUserFormSubmit = () => {
       sendButton.disabled = true;
       sendData(
         ()=>{showAlertSuccessSend();
-          reset();},
-        showAlertErrorSend,
+          reset();
+          sendButton.disabled = false;},
+        ()=>{showAlertErrorSend();
+          sendButton.disabled = false;},
         new FormData(evt.target),
       );
-      sendButton.disabled = false;
     }
   });};
 

@@ -48,38 +48,52 @@ const showAlertErrorGet = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
+const onSuccessEscPress = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    closeSuccess();
+  }
+};
+
+function closeSuccess () {
+  messageSuccessTemplate.remove();
+  document.removeEventListener('keydown', onSuccessEscPress);
+}
+
 const showAlertSuccessSend = () => {
   document.body.append(messageSuccessTemplate);
 
   messageSuccessTemplate.addEventListener('click', ()=>{
-    messageSuccessTemplate.remove();
+    closeSuccess();
   });
 
-  document.addEventListener('keydown', (evt)=>{
-    if (isEscapeKey(evt)) {
-      evt.preventDefault();
-      messageSuccessTemplate.remove();
-    }
-  }, {once:true});
+  document.addEventListener('keydown', onSuccessEscPress);
 };
+
+const onErrorEscPress = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    closeError();
+  }
+};
+
+function closeError () {
+  messageErrorTemplate.remove();
+  document.removeEventListener('keydown', onErrorEscPress);
+}
 
 const showAlertErrorSend = () => {
   document.body.append(messageErrorTemplate);
 
   messageErrorTemplate.addEventListener('click', ()=>{
-    messageErrorTemplate.remove();
+    closeError();
   });
 
   closeErrorAlertButton.addEventListener('click', ()=>{
-    messageErrorTemplate.remove();
+    closeError();
   });
 
-  document.addEventListener('keydown', (evt)=>{
-    if (isEscapeKey(evt)) {
-      evt.preventDefault();
-      messageErrorTemplate.remove();
-    }
-  }, {once:true});
+  document.addEventListener('keydown', onErrorEscPress);
 };
 
 const debounce = (callback, timeoutDelay) => {
