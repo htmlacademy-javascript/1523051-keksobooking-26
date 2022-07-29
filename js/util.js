@@ -1,3 +1,5 @@
+const ALERT_SHOW_TIME = 5000;
+
 const messageSuccessTemplate = document.querySelector('#success')
   .content
   .querySelector('.success');
@@ -9,23 +11,6 @@ const messageErrorTemplate = document.querySelector('#error')
 const closeErrorAlertButton = messageErrorTemplate.querySelector('.error__button');
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
-
-const getRandomInt = (min, max) => {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
-const getRandomFloatInclusive = (min, max, afterPoint) => {
-  if (max>min) {
-    return Number((min + Math.random() * (max - min)).toFixed(afterPoint));}
-  if (min===max) {
-    return Number(min.toFixed(afterPoint));
-  }
-  return 'Значение От больше значения До';
-};
-
-const ALERT_SHOW_TIME = 5000;
 
 const showAlertErrorGet = (message) => {
   const alertContainer = document.createElement('div');
@@ -104,4 +89,4 @@ const debounce = (callback, timeoutDelay) => {
   };
 };
 
-export {getRandomInt, getRandomFloatInclusive, showAlertErrorGet, showAlertSuccessSend, showAlertErrorSend, debounce};
+export {showAlertErrorGet, showAlertSuccessSend, showAlertErrorSend, debounce};
