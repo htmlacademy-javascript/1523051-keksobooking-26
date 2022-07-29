@@ -20,15 +20,9 @@ const checkPryce = (offer)=> {
   if (housingPrice.value === 'high') {return offer.offer.price >HIGH_PRICE;}
 };
 
-const checkRooms = (offer)=> {
-  if (housingGuests.value === 'any' || offer.offer.guests === +housingGuests.value) {return true;}
-  return false;
-};
+const checkRooms = (offer)=> housingGuests.value === 'any' || offer.offer.guests === +housingGuests.value;
 
-const checkGuests = (offer)=> {
-  if (housingRooms.value === 'any' || offer.offer.rooms === +housingRooms.value) {return true;}
-  return false;
-};
+const checkGuests = (offer)=> housingRooms.value === 'any' || offer.offer.rooms === +housingRooms.value;
 
 const checkFeatures = (offer, features)=> {
   let checkSum = 0;

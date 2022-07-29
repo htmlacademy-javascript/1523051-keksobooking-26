@@ -13,6 +13,10 @@ const HOTEL_PRICE = 5000;
 const PALACE_PRICE = 10000;
 const latCenter = 35.70000;
 const lngCenter = 139.42500;
+const NO_ROOMS = '0';
+const ONE_ROOMS = '1';
+const TWO_ROOMS = '2';
+const THREE_ROOMS = '3';
 
 
 const form = document.querySelector('.ad-form');
@@ -89,7 +93,7 @@ window.addEventListener ('load', ()=> {
   setPriceForHouseType();
 });
 
-const reset = () => {
+const resetFormFields = () => {
   form.reset();
   mapFilter.reset();
   previewPhotoContainer.innerHTML = '';
@@ -108,7 +112,7 @@ const reset = () => {
 
 const resetSubmitForm = (cb) => {
   const resetForm = () => {
-    reset();
+    resetFormFields();
     cb();
   };
   form.addEventListener('reset', resetForm);
@@ -133,13 +137,13 @@ const validateGuestNumber = () => roomNumber.value >= guestNumber.value;
 
 const getGuestsErrorMessage = () => {
   switch (roomNumber.value) {
-    case '3':
+    case THREE_ROOMS:
       return 'для 1 гостя, для 2 гостей или для 3 гостей';
-    case '2':
+    case TWO_ROOMS:
       return 'для 1 гостя или для 2 гостей';
-    case '1':
+    case ONE_ROOMS:
       return 'для 1 гостя';
-    case '0':
+    case NO_ROOMS:
       return 'не для гостей';
   }
 };
@@ -158,7 +162,7 @@ timeOut.addEventListener('change',()=>{
 
 resetButton.addEventListener('click',(evt)=>{
   evt.preventDefault();
-  reset();
+  resetFormFields();
 });
 
 const setUserFormSubmit = () => {
@@ -168,7 +172,7 @@ const setUserFormSubmit = () => {
       sendButton.disabled = true;
       sendData(
         ()=>{showAlertSuccessSend();
-          reset();
+          resetFormFields();
           sendButton.disabled = false;},
         ()=>{showAlertErrorSend();
           sendButton.disabled = false;},
@@ -177,4 +181,4 @@ const setUserFormSubmit = () => {
     }
   });};
 
-export {latCenter, lngCenter, address, setUserFormSubmit, form, reset, resetSubmitForm};
+export {latCenter, lngCenter, address, setUserFormSubmit, form, resetSubmitForm};
